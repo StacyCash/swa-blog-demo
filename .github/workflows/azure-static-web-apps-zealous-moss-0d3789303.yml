@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths: 
+      - "EditDemo"
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
