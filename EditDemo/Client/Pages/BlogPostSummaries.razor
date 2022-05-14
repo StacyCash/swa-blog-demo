@@ -1,0 +1,42 @@
+﻿@page "/blogposts"
+@inject BlogPostSummaryService service
+@inject NavigationManager navigationManager
+@using Markdig
+
+<PageTitle>Blog posts</PageTitle>
+
+<h1>Blog posts</h1>
+
+@if (service.Summaries is null)
+{
+    <div>Loading...</div>
+}
+else
+{
+    foreach (var blogPostSummary in service.Summaries)
+    {
+    <div @onclick="() => Navigate(blogPostSummary.Id)">
+        <h2>@blogPostSummary.Title</h2>
+        <div>
+     	    @foreach(var tag in blogPostSummary.Tags)
+     	    {
+     		    <span>@tag, </span>
+            }
+        </div>
+        <div>
+ 	        @((MarkupString)Markdown.ToHtml(blogPostSummary.BlogPostMarkdown))
+        </div>
+    </div>
+
+    }
+}
+
+@code
+{
+    void Navigate(Guid id) => navigationManager.NavigateTo($"/blogposts/{id}");
+
+    protected override async Task OnInitializedAsync()
+    {
+        await service.LoadBlogPostSummaries();
+    }
+}
