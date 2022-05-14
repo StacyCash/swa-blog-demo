@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "ReadDemo/"
+      - "ReadDemo/**"
       - ".github/workflows/azure-static-web-apps-delightful-cliff-02545aa03.yml"
 
   pull_request:
