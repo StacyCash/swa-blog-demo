@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "INoG9NATS/rqF/wBDAS82Jfdwd0P19U/0nCTITgmts4=",
+  "Hash": "YYYA2f6pjch9MMLMivpls44EyZJPqYu6mqG6JWNLzRk=",
   "Source": "Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -202,6 +202,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Runtime.Mono.browser-wasm\\6.0.4\\runtimes\\browser-wasm\\native\\icudt_no_CJK.dat"
+    },
+    {
+      "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Markdig.Signed.dll",
+      "SourceId": "Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Markdig.Signed.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\stace\\.nuget\\packages\\markdig.signed\\0.30.2\\lib\\net6.0\\Markdig.Signed.dll"
     },
     {
       "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Authorization.dll",
@@ -729,6 +746,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Program Files\\dotnet\\packs\\Microsoft.NETCore.App.Runtime.Mono.browser-wasm\\6.0.4\\runtimes\\browser-wasm\\lib\\net6.0\\netstandard.dll"
+    },
+    {
+      "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "SourceId": "Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "BlazorWebAssemblyResource",
+      "AssetTraitValue": "runtime",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "C:\\Users\\stace\\.nuget\\packages\\newtonsoft.json\\13.0.1\\lib\\netstandard2.0\\Newtonsoft.Json.dll"
     },
     {
       "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.AppContext.dll",
@@ -5423,6 +5457,23 @@
       "OriginalItemSpec": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Microsoft.Extensions.DependencyInjection.Abstractions.dll"
     },
     {
+      "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\obj\\Debug\\net6.0\\build-gz\\lxsIflK4.gz",
+      "SourceId": "Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Newtonsoft.Json.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Newtonsoft.Json.dll"
+    },
+    {
       "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\obj\\Debug\\net6.0\\build-gz\\Lz2RQaGu.gz",
       "SourceId": "Client",
       "SourceType": "Computed",
@@ -5472,6 +5523,23 @@
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\System.Security.Cryptography.Algorithms.dll"
+    },
+    {
+      "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\obj\\Debug\\net6.0\\build-gz\\mg06XHQ8.gz",
+      "SourceId": "Client",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "_framework/Markdig.Signed.dll.gz",
+      "AssetKind": "Build",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "RelatedAsset": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Markdig.Signed.dll",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "CopyToOutputDirectory": "PreserveNewest",
+      "CopyToPublishDirectory": "Never",
+      "OriginalItemSpec": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\bin\\Debug\\net6.0\\wwwroot\\_framework\\Markdig.Signed.dll"
     },
     {
       "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\obj\\Debug\\net6.0\\build-gz\\MhCvS97m.gz",
@@ -7155,6 +7223,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\wwwroot\\staticwebapp.config.json",
+      "SourceId": "Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\code\\github\\swa-blog-demo\\ReadDemo\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "staticwebapp.config.json",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\staticwebapp.config.json"
     }
   ]
 }

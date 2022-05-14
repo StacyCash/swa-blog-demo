@@ -1,0 +1,44 @@
+﻿@page "/blogposts/{id}"
+@inject BlogPostService service
+@using Markdig
+@using Models
+
+@if (blogPost is null)
+{
+    <div>Loading...</div>
+}
+else
+{
+	<div>
+		<h1>@blogPost.Title</h1>
+		<h2>@blogPost.Author</h2>
+		<div>@blogPost.PublishedDate</div>
+		<div>
+		@foreach(var tag in blogPost.Tags)
+		{
+		<em>@tag, </em>
+		}
+		</div>
+		<div>
+		@((MarkupString)Markdown.ToHtml(blogPost.BlogPostMarkdown))
+		</div>
+	</div>
+}
+
+@code
+{
+	private BlogPost blogPost;
+
+	[Parameter] 
+	public string Id { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (!Guid.TryParse(Id, out Guid id))
+		{
+			throw new InvalidCastException();
+		}
+
+		blogPost = await service.GetBlogPost(id);
+	}
+}

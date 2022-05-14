@@ -821,3 +821,11 @@ D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\Models.dll
 D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\Models.pdb
 D:\code\github\swa-blog-demo\ReadDemo\Client\obj\Debug\net6.0\build-gz\Kn6hnnmz.gz
 D:\code\github\swa-blog-demo\ReadDemo\Client\obj\Debug\net6.0\build-gz\05wKOkZn.gz
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\wwwroot\_framework\Markdig.Signed.dll
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\wwwroot\_framework\Newtonsoft.Json.dll
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\wwwroot\_framework\Newtonsoft.Json.dll.gz
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\wwwroot\_framework\Markdig.Signed.dll.gz
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\Markdig.Signed.dll
+D:\code\github\swa-blog-demo\ReadDemo\Client\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\code\github\swa-blog-demo\ReadDemo\Client\obj\Debug\net6.0\build-gz\mg06XHQ8.gz
+D:\code\github\swa-blog-demo\ReadDemo\Client\obj\Debug\net6.0\build-gz\lxsIflK4.gz

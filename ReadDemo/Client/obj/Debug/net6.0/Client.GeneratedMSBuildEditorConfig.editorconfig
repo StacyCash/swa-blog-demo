@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/code/github/swa-blog-demo/ReadDemo/Client/Pages/BlogPostSummaries.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmxvZ1Bvc3RTdW1tYXJpZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/code/github/swa-blog-demo/ReadDemo/Client/Pages/FullBlogPost.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRnVsbEJsb2dQb3N0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/code/github/swa-blog-demo/ReadDemo/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
