@@ -1,0 +1,64 @@
+﻿@page "/blogposts/{id}/edit"
+@using Microsoft.AspNetCore.Authorization
+@using Models
+@attribute [Authorize(Roles = "admin")]
+@inject BlogPostService service
+@inject NavigationManager navigationManager;
+
+@if (blogPost is null)
+{
+    <div>Loading...</div>
+}
+else
+{
+	<div>
+		<div><em>Title</em><input @bind="blogPost.Title" /></div>
+		<div><em>Author</em><input @bind="blogPost.Author" /></div>
+		<div><em>Tags</em><input @bind="tags" /></div>
+		<div><em>Post</em><textarea rows="30" @bind="blogPost.BlogPostMarkdown" /></div>
+	</div>
+	<button @onclick="Save">Save</button>
+}
+
+@code
+{
+	private BlogPost blogPost;
+	private string mode = "edit";
+	private string tags = string.Empty;
+
+	[Parameter] 
+	public string Id { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		if (Id == "new"){
+			mode = "create";
+			blogPost = new ();
+			return;
+		}
+
+		if (!Guid.TryParse(Id, out Guid id))
+		{
+			throw new InvalidCastException();
+		}
+
+		blogPost = await service.GetBlogPost(id);
+		blogPost.Tags.ToList().ForEach(t => tags += $"{t}, ");
+	}
+
+	private async void Save()
+	{
+		blogPost.Tags = tags.Split(", ");
+		if (mode == "create")
+		{
+			blogPost.PublishedDate = DateTime.Now;
+			blogPost.Id = await service.CreateBlogPost(blogPost);
+		}
+		else
+		{
+			await service.UpdateBlogPost(blogPost);
+		}
+
+		navigationManager.NavigateTo($"blogposts/{blogPost.Id}");
+	}
+}

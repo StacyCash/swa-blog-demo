@@ -9,6 +9,11 @@
 }
 else
 {
+	<AuthorizeView Roles="admin">
+        <Authorized>
+            <a href="blogposts/@Id/edit">Edit</a>
+        </Authorized>
+    </AuthorizeView> 
 	<div>
 		<h1>@blogPost.Title</h1>
 		<h2>@blogPost.Author</h2>

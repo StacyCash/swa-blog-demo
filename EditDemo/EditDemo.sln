@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{339D05BF-EA32-4FCE-AE4B-F681BA17D8CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{339D05BF-EA32-4FCE-AE4B-F681BA17D8CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{22E3FD47-FAB6-41DA-8981-6B1F6A6D198E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{22E3FD47-FAB6-41DA-8981-6B1F6A6D198E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{6216815D-E1A5-42A9-9668-4204E3422C7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{6216815D-E1A5-42A9-9668-4204E3422C7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticWebAppAuthentication", "StaticWebAppAuthentication\StaticWebAppAuthentication.csproj", "{177128F0-11E0-4024-B9B5-A3A433E818DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6216815D-E1A5-42A9-9668-4204E3422C7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6216815D-E1A5-42A9-9668-4204E3422C7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6216815D-E1A5-42A9-9668-4204E3422C7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{177128F0-11E0-4024-B9B5-A3A433E818DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{177128F0-11E0-4024-B9B5-A3A433E818DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{177128F0-11E0-4024-B9B5-A3A433E818DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{177128F0-11E0-4024-B9B5-A3A433E818DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

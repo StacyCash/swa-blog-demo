@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Models;
+using System;
 
 namespace CosmosDBTest;
 
@@ -67,4 +68,56 @@ public static class BlogPosts
         return new OkObjectResult(blogposts.First());
     }
 
+    [FunctionName($"{nameof(BlogPosts)}_Post")]
+    public static IActionResult PostBlogPost(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post",
+            Route = "blogposts")]
+            BlogPost blogPost,
+        [CosmosDB("SwaBlog", "BlogContainer",
+            Connection = "CosmosDbConnectionString")]out dynamic document,
+        ILogger log)
+    {
+        if (blogPost.Id != null)
+        {
+            throw new ArgumentException($"Blog post already has ID: {blogPost.Id}");
+        }
+
+        blogPost.Id = Guid.NewGuid();
+
+        document = new
+        {
+            id = blogPost.Id.ToString(),
+            Title = blogPost.Title,
+            Author = blogPost.Author,
+            PublishedDate = blogPost.PublishedDate,
+            Tags = blogPost.Tags,
+            BlogPostMarkdown = blogPost.BlogPostMarkdown,
+            Status = 2
+        };
+
+        return new OkObjectResult(blogPost);
+    }
+
+    [FunctionName($"{nameof(BlogPosts)}_Put")]
+    public static IActionResult PutBlogPost(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "put",
+            Route = "blogposts")]
+            BlogPost blogPost,
+        [CosmosDB("SwaBlog", "BlogContainer",
+            Connection = "CosmosDbConnectionString")]out dynamic document,
+        ILogger log)
+    {
+        document = new
+        {
+            id = blogPost.Id.ToString(),
+            Title = blogPost.Title,
+            Author = blogPost.Author,
+            PublishedDate = blogPost.PublishedDate,
+            Tags = blogPost.Tags,
+            BlogPostMarkdown = blogPost.BlogPostMarkdown,
+            Status = 2
+        };
+
+        return new OkObjectResult(blogPost);
+    }
 }

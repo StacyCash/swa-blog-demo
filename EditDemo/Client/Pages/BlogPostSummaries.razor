@@ -13,19 +13,26 @@
 }
 else
 {
-    foreach (var blogPostSummary in service.Summaries)
+    <AuthorizeView Roles="admin">
+        <Authorized>
+            <a href="blogposts/new/edit">Create</a>
+        </Authorized>
+    </AuthorizeView>
+
+    foreach (var blogPostSummary in service.Summaries.OrderByDescending(bp => bp.PublishedDate))
     {
-    <div @onclick="() => Navigate(blogPostSummary.Id)">
+    <div @onclick="() => Navigate(blogPostSummary.Id!.Value)">
         <h2>@blogPostSummary.Title</h2>
         <div>
-     	    @foreach(var tag in blogPostSummary.Tags)
+     	    @foreach(var tag in blogPostSummary.Tags!)
      	    {
      		    <span>@tag, </span>
             }
         </div>
         <div>
- 	        @((MarkupString)Markdown.ToHtml(blogPostSummary.BlogPostMarkdown))
+ 	        @((MarkupString)Markdown.ToHtml(blogPostSummary.BlogPostMarkdown!))
         </div>
+        <hr />
     </div>
 
     }
