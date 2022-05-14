@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths: 
-      - "EditDemo/"
+      - "EditDemo/**"
       - ".github/workflows/azure-static-web-apps-zealous-moss-0d3789303.yml"
       
   pull_request:
