@@ -76,8 +76,13 @@ public class BlogPostService
         var result = await http.PutAsync("api/blogposts", data);
         var json = await result.Content.ReadAsStringAsync();
         BlogPost? savedBlogPost = JsonConvert.DeserializeObject<BlogPost>(json);
-        _ = blogPosts.Remove(blogPosts.FirstOrDefault(bp => bp.Id == blogPost.Id)!);
-        blogPosts.Add(savedBlogPost!);
+
+        int index = blogPosts.FindIndex(item => item.Id == savedBlogPost.Id);
+        if (index >= 0)
+        {
+            blogPosts[index] = savedBlogPost;
+        }
+
         blogPostSummaryService.Replace(savedBlogPost!);
     }
 

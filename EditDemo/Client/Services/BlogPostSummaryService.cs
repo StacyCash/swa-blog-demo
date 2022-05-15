@@ -54,8 +54,12 @@ public class BlogPostSummaryService
         }
 
         var list = Summaries.ToList();
-        _ = list.Remove(list.FirstOrDefault(bp => bp.Id == blogPost.Id)!);
-        list.Add(blogPost);
+
+        int index = list.FindIndex(item => item.Id == blogPost.Id);
+        if (index >= 0)
+        {
+            list[index] = blogPost;
+        }
         Summaries = list;
     }
 }
