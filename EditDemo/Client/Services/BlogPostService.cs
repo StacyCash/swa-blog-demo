@@ -57,11 +57,11 @@ public class BlogPostService
 
         var result = await http.PostAsync("api/blogposts", data);
         var json = await result.Content.ReadAsStringAsync();
-        BlogPost? x = JsonConvert.DeserializeObject<BlogPost>(json);
-        blogPosts.Add(x!);
-        blogPostSummaryService.Add(x!);
+        BlogPost? savedBlogPost = JsonConvert.DeserializeObject<BlogPost>(json);
+        blogPosts.Add(savedBlogPost!);
+        blogPostSummaryService.Add(savedBlogPost!);
 
-        return x.Id.Value;
+        return savedBlogPost.Id.Value;
     }
 
     public async Task UpdateBlogPost(BlogPost blogPost)
@@ -71,10 +71,10 @@ public class BlogPostService
 
         var result = await http.PutAsync("api/blogposts", data);
         var json = await result.Content.ReadAsStringAsync();
-        BlogPost? x = JsonConvert.DeserializeObject<BlogPost>(json);
+        BlogPost? savedBlogPost = JsonConvert.DeserializeObject<BlogPost>(json);
         _ = blogPosts.Remove(blogPosts.FirstOrDefault(bp => bp.Id == blogPost.Id)!);
-        blogPosts.Add(x!);
-        blogPostSummaryService.Replace(x!);
+        blogPosts.Add(savedBlogPost!);
+        blogPostSummaryService.Replace(savedBlogPost!);
     }
 
 }
