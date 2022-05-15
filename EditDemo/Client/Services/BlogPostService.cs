@@ -24,6 +24,11 @@ public class BlogPostService
 
     public async Task<BlogPost?> GetBlogPost(Guid blogPostId)
     {
+        if (blogPosts.Any(bp => bp.Id == blogPostId))
+        {
+            return blogPosts.FirstOrDefault(bp => bp.Id == blogPostId);
+        }
+
         var result = await http.GetAsync($"api/blogposts/{blogPostId}");
         if (!result.IsSuccessStatusCode)
         {
@@ -41,7 +46,7 @@ public class BlogPostService
 
         blogPosts.Add(blogPost);
 
-        return blogPosts.FirstOrDefault(bp => bp.Id == blogPostId);
+        return blogPost;
     }
 
     public async Task<Guid> CreateBlogPost(BlogPost blogPost)

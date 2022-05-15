@@ -42,7 +42,7 @@ else
 {
     void Navigate(Guid id) => navigationManager.NavigateTo($"/blogposts/{id}");
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await service.LoadBlogPostSummaries();
     }

@@ -42,7 +42,7 @@ else
 	[Parameter] 
 	public string Id { get; set; }
 
-	protected override async Task OnInitializedAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 		if (Id == "new"){
 			mode = "create";
@@ -56,12 +56,15 @@ else
 		}
 
 		blogPost = await service.GetBlogPost(id);
+
+		blogPost.Tags = blogPost.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 		blogPost.Tags.ToList().ForEach(t => tags += $"{t}, ");
 	}
 
 	private async void Save()
 	{
-		blogPost.Tags = tags.Split(", ");
+		blogPost.Tags = tags.Split(", ").Where(x => !string.IsNullOrEmpty(x)).ToArray();
+
 		if (mode == "create")
 		{
 			blogPost.PublishedDate = DateTime.Now;
