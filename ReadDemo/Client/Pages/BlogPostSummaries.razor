@@ -13,21 +13,21 @@
 }
 else
 {
-    foreach (var blogPostSummary in service.Summaries)
+    foreach (var blogPostSummary in service.Summaries.OrderByDescending(bp => bp.PublishedDate))
     {
-    <div @onclick="() => Navigate(blogPostSummary.Id)">
+    <div @onclick="() => Navigate(blogPostSummary.Id!)">
         <h2>@blogPostSummary.Title</h2>
         <div>
-     	    @foreach(var tag in blogPostSummary.Tags)
+     	    @foreach(var tag in blogPostSummary.Tags!)
      	    {
      		    <span>@tag, </span>
             }
         </div>
         <div>
- 	        @((MarkupString)Markdown.ToHtml(blogPostSummary.BlogPostMarkdown))
+ 	        @((MarkupString)Markdown.ToHtml(blogPostSummary.BlogPostMarkdown!))
         </div>
+        <hr />
     </div>
-
     }
 }
 
@@ -35,7 +35,7 @@ else
 {
     void Navigate(Guid id) => navigationManager.NavigateTo($"/blogposts/{id}");
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await service.LoadBlogPostSummaries();
     }
