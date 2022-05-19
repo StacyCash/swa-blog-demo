@@ -4,38 +4,39 @@
 @attribute [Authorize(Roles = "admin")]
 @inject BlogPostService service
 @inject NavigationManager navigationManager;
-    <AuthorizeView Roles="admin">
-        <Authorized>
 
-@if (blogPost is null)
-{
-    <div>Loading...</div>
-}
-else
-{
-	<EditForm Model="blogPost" OnValidSubmit="Save">
-		<div>
-			<div>Title</div>
-			<div><InputText @bind-Value=blogPost.Title /></div>
-		</div>
-		<div>
-			<div>Author</div>
-			<div><InputText @bind-Value=blogPost.Author /></div>
-		</div>
-		<div>
-			<div>Tags</div>
-			<div><InputText @bind-Value=tags /></div>
-		</div>
-		<div>
-			<div>Post</div>
-			<div><InputTextArea @bind-Value=blogPost.BlogPostMarkdown /></div>
-		</div>
-		<button type="submit">Save</button>
+<AuthorizeView Roles="admin">
+	<Authorized>
 
-	</EditForm>
-}
-        </Authorized>
-    </AuthorizeView>
+	@if (blogPost is null)
+	{
+		<div>Loading...</div>
+	}
+	else
+	{
+		<EditForm Model="blogPost" OnValidSubmit="Save">
+			<div>
+				<div>Title</div>
+				<div><InputText @bind-Value=blogPost.Title /></div>
+			</div>
+			<div>
+				<div>Author</div>
+				<div><InputText @bind-Value=blogPost.Author /></div>
+			</div>
+			<div>
+				<div>Tags</div>
+				<div><InputText @bind-Value=tags /></div>
+			</div>
+			<div>
+				<div>Post</div>
+				<div><InputTextArea @bind-Value=blogPost.BlogPostMarkdown /></div>
+			</div>
+			<button type="submit">Save</button>
+
+		</EditForm>
+	}
+	</Authorized>
+</AuthorizeView>
 
 @code
 {
