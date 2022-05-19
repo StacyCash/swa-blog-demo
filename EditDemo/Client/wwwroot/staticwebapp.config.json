@@ -2,12 +2,12 @@
   "routes": [
     {
       "route": "/api/blogposts",
-      "method": ["POST", "PUT"],
+      "methods": ["POST", "PUT"],
       "allowedRoles": ["admin"]
     },
     {
       "route": "/api/blogposts",
-      "method": ["GET"]
+      "methods": ["GET"]
     }
   ],
   "navigationFallback": {
