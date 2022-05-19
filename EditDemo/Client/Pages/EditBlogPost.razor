@@ -14,7 +14,7 @@
 	}
 	else
 	{
-		<EditForm Model="blogPost" OnValidSubmit="Save">
+		<EditForm Model="blogPost" OnValidSubmit="Save" Context="EditContext">
 			<div>
 				<div>Title</div>
 				<div><InputText @bind-Value=blogPost.Title /></div>
