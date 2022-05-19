@@ -4,6 +4,8 @@
 @attribute [Authorize(Roles = "admin")]
 @inject BlogPostService service
 @inject NavigationManager navigationManager;
+    <AuthorizeView Roles="admin">
+        <Authorized>
 
 @if (blogPost is null)
 {
@@ -32,6 +34,8 @@ else
 
 	</EditForm>
 }
+        </Authorized>
+    </AuthorizeView>
 
 @code
 {
