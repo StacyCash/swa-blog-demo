@@ -4,10 +4,6 @@
       "route": "/api/blogposts",
       "methods": ["POST", "PUT"],
       "allowedRoles": ["admin"]
-    },
-    {
-      "route": "/api/blogposts",
-      "methods": ["GET"]
     }
   ],
   "navigationFallback": {
