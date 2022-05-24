@@ -19,7 +19,7 @@ else
 		<h2>@blogPost.Author</h2>
 		<div>@blogPost.PublishedDate</div>
 		<div>
-		@foreach(var tag in blogPost.Tags)
+		@foreach(var tag in blogPost.Tags.CleanTags())
 		{
 		<em>@tag, </em>
 		}

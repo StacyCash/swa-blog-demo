@@ -24,7 +24,7 @@ else
     <div @onclick="() => Navigate(blogPostSummary.Id!.Value)">
         <h2>@blogPostSummary.Title</h2>
         <div>
-     	    @foreach(var tag in blogPostSummary.Tags!)
+     	    @foreach(var tag in blogPostSummary.Tags!.CleanTags())
      	    {
      		    <span>@tag, </span>
             }

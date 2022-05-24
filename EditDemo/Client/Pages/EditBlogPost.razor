@@ -56,14 +56,12 @@ else
 		}
 
 		blogPost = await service.GetBlogPost(id);
-
-		blogPost.Tags = blogPost.Tags.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-		blogPost.Tags.ToList().ForEach(t => tags += $"{t}, ");
+		tags = String.Join(", ", blogPost.Tags.CleanTags());
 	}
 
 	private async void Save()
 	{
-		blogPost.Tags = tags.Split(", ").Where(x => !string.IsNullOrEmpty(x)).ToArray();
+		blogPost.Tags = tags.Split(',').CleanTags();
 
 		if (mode == "create")
 		{
