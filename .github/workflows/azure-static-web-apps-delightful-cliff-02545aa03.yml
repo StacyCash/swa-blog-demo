@@ -12,6 +12,9 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+    paths:
+      - "ReadDemo/**"
+      - ".github/workflows/azure-static-web-apps-delightful-cliff-02545aa03.yml"
 
 jobs:
   build_and_deploy_job:
