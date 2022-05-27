@@ -128,6 +128,8 @@ public static class BlogPosts
     [HttpTrigger(AuthorizationLevel.Anonymous, "delete",
             Route = "blogposts/{id}/{author}")]
             HttpRequest request,
+            string id,
+            string author,
     [CosmosDB(
             databaseName: "ToDoItems",
             containerName: "Items",
@@ -135,9 +137,6 @@ public static class BlogPosts
 
     ILogger log)
     {
-        string id = request.Query["id"];
-        string author = request.Query["author"];
-
         if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(author))
         {
             return new BadRequestObjectResult("Invalid Paramters");
