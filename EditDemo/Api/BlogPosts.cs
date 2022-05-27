@@ -111,7 +111,7 @@ public static class BlogPosts
                 SqlQuery = @"
                     SELECT COUNT(*)
                     FROM c
-                    WHERE c.id = {id} and c.author = {author}")
+                    WHERE c.id = {Id} and c.author = {Author}")
             ] IEnumerable<int> blogPostCount,
         [CosmosDB("SwaBlog", "BlogContainer",
             Connection = "CosmosDbConnectionString")]out dynamic document,
