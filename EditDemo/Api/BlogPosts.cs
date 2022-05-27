@@ -81,7 +81,8 @@ public static class BlogPosts
     {
         if (blogPost.Id != null)
         {
-            throw new ArgumentException($"Blog post already has ID: {blogPost.Id}");
+            document = null;
+            return new BadRequestResult();
         }
 
         blogPost.Id = Guid.NewGuid();
@@ -106,19 +107,32 @@ public static class BlogPosts
             Route = "blogposts")]
             BlogPost blogPost,
         [CosmosDB("SwaBlog", "BlogContainer",
+                Connection = "CosmosDbConnectionString",
+                SqlQuery = @"
+                    SELECT COUNT(*)
+                    FROM c
+                    WHERE c.id = {id} and c.author = {author}")
+            ] IEnumerable<int> blogPostCount,
+        [CosmosDB("SwaBlog", "BlogContainer",
             Connection = "CosmosDbConnectionString")]out dynamic document,
         ILogger log)
     {
-        document = new
+        if (blogPostCount.First() == 0)
         {
-            id = blogPost.Id.ToString(),
-            Title = blogPost.Title,
-            Author = blogPost.Author,
-            PublishedDate = blogPost.PublishedDate,
-            Tags = blogPost.Tags,
-            BlogPostMarkdown = blogPost.BlogPostMarkdown,
-            Status = 2
-        };
+            document = null;
+            return new NotFoundResult();
+        }
+
+        document = new
+            {
+                id = blogPost.Id.ToString(),
+                Title = blogPost.Title,
+                Author = blogPost.Author,
+                PublishedDate = blogPost.PublishedDate,
+                Tags = blogPost.Tags,
+                BlogPostMarkdown = blogPost.BlogPostMarkdown,
+                Status = 2
+            };
 
         return new OkObjectResult(blogPost);
     }
