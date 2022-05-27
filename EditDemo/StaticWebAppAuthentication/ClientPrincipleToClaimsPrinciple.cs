@@ -14,11 +14,17 @@ public static class ClientPrincipleToClaimsPrinciple
             return new ClaimsPrincipal();
         }
 
-        var identity = new ClaimsIdentity(principal.IdentityProvider);
-        identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, principal.UserId));
-        identity.AddClaim(new Claim(ClaimTypes.Name, principal.UserDetails));
-        identity.AddClaims(principal.UserRoles.Select(r => new Claim(ClaimTypes.Role, r)));
+        ClaimsIdentity identity = AdaptToClaimsIdentity(principal);
 
         return new ClaimsPrincipal(identity);
+    }
+
+    private static ClaimsIdentity AdaptToClaimsIdentity(ClientPrincipal principal)
+    {
+        var identity = new ClaimsIdentity(principal.IdentityProvider);
+        identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, principal.UserId!));
+        identity.AddClaim(new Claim(ClaimTypes.Name, principal.UserDetails!));
+        identity.AddClaims(principal.UserRoles!.Select(r => new Claim(ClaimTypes.Role, r)));
+        return identity;
     }
 }

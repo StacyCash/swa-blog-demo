@@ -40,12 +40,12 @@
 
 @code
 {
-	private BlogPost blogPost;
+	private BlogPost? blogPost;
 	private string mode = "edit";
 	private string tags = string.Empty;
 
 	[Parameter] 
-	public string Id { get; set; }
+	public string? Id { get; set; }
 
 	protected override async Task OnParametersSetAsync()
 	{
@@ -61,12 +61,12 @@
 		}
 
 		blogPost = await service.GetBlogPost(id);
-		tags = String.Join(", ", blogPost.Tags.CleanTags());
+		tags = String.Join(", ", blogPost!.Tags!.CleanTags());
 	}
 
 	private async void Save()
 	{
-		blogPost.Tags = tags.Split(',').CleanTags();
+		blogPost!.Tags = tags.Split(',').CleanTags();
 
 		if (mode == "create")
 		{

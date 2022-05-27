@@ -65,7 +65,7 @@ public class BlogPostService
         blogPosts.Add(savedBlogPost!);
         blogPostSummaryService.Add(savedBlogPost!);
 
-        return savedBlogPost.Id.Value;
+        return savedBlogPost!.Id!.Value;
     }
 
     public async Task UpdateBlogPost(BlogPost blogPost)
@@ -77,13 +77,20 @@ public class BlogPostService
         var json = await result.Content.ReadAsStringAsync();
         BlogPost? savedBlogPost = JsonConvert.DeserializeObject<BlogPost>(json);
 
-        int index = blogPosts.FindIndex(item => item.Id == savedBlogPost.Id);
+        int index = blogPosts.FindIndex(item => item.Id == savedBlogPost!.Id);
         if (index >= 0)
         {
-            blogPosts[index] = savedBlogPost;
+            blogPosts[index] = savedBlogPost!;
         }
 
         blogPostSummaryService.Replace(savedBlogPost!);
+    }
+
+    public void Delete(Guid id, string author)
+    {
+        http.DeleteAsync($"/api/blogposts/{id}/{author}");
+        blogPosts.Remove(blogPosts.FirstOrDefault(bp => bp.Id == id));
+        blogPostSummaryService.Remove(id);
     }
 
 }

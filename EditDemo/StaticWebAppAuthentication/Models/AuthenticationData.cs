@@ -2,6 +2,6 @@
 {
     public class AuthenticationData
     {
-        public ClientPrincipal ClientPrincipal { get; set; }
+        public ClientPrincipal? ClientPrincipal { get; set; }
     }
 }

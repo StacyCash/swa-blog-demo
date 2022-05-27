@@ -8,6 +8,8 @@ using System.Linq;
 
 using Models;
 using System;
+using Microsoft.Azure.Cosmos;
+using System.Threading.Tasks;
 
 namespace CosmosDBTest;
 
@@ -119,5 +121,31 @@ public static class BlogPosts
         };
 
         return new OkObjectResult(blogPost);
+    }
+
+    [FunctionName($"{nameof(BlogPosts)}_Delete")]
+    public static async Task<IActionResult> DeleteBlogPost(
+    [HttpTrigger(AuthorizationLevel.Anonymous, "delete",
+            Route = "blogposts/{id}/{author}")]
+            HttpRequest request,
+    [CosmosDB(
+            databaseName: "ToDoItems",
+            containerName: "Items",
+            Connection = "CosmosDBConnection")] CosmosClient client,
+
+    ILogger log)
+    {
+        string id = request.Query["id"];
+        string author = request.Query["author"];
+
+        if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(author))
+        {
+            return new BadRequestObjectResult("Invalid Paramters");
+        }
+
+        Container container = client.GetDatabase("SwaBlog").GetContainer("BlogContainer");
+        await container.DeleteItemAsync<BlogPost>(id, new PartitionKey(author));
+
+        return new OkResult();
     }
 }
