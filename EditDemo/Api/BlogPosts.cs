@@ -131,7 +131,7 @@ public static class BlogPosts
     [CosmosDB(
             databaseName: "ToDoItems",
             containerName: "Items",
-            Connection = "CosmosDBConnection")] CosmosClient client,
+            Connection = "CosmosDbConnectionString")] CosmosClient client,
 
     ILogger log)
     {
