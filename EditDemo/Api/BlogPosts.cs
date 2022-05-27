@@ -142,6 +142,11 @@ public static class BlogPosts
             HttpRequest request,
             string id,
             string author,
+    [CosmosDB("SwaBlog",
+            "BlogContainer",
+            Connection = "CosmosDbConnectionString",
+            Id = "{Id}",
+            PartitionKey = "{Author}")] BlogPost bp,
     [CosmosDB(
             databaseName: "ToDoItems",
             containerName: "Items",
@@ -149,9 +154,9 @@ public static class BlogPosts
 
     ILogger log)
     {
-        if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(author))
+        if (bp is null)
         {
-            return new BadRequestObjectResult("Invalid Paramters");
+            return new OkResult();
         }
 
         Container container = client.GetDatabase("SwaBlog").GetContainer("BlogContainer");
