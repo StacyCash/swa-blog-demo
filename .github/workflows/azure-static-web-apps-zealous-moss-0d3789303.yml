@@ -12,7 +12,7 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-  paths: 
+    paths: 
       - "EditDemo/**"
       - ".github/workflows/azure-static-web-apps-zealous-moss-0d3789303.yml"
 
