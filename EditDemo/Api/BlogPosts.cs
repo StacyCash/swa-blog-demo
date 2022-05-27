@@ -106,18 +106,16 @@ public static class BlogPosts
         [HttpTrigger(AuthorizationLevel.Anonymous, "put",
             Route = "blogposts")]
             BlogPost blogPost,
-        [CosmosDB("SwaBlog", "BlogContainer",
+        [CosmosDB("SwaBlog",
+                "BlogContainer",
                 Connection = "CosmosDbConnectionString",
-                SqlQuery = @"
-                    SELECT COUNT(*)
-                    FROM c
-                    WHERE c.id = {Id} and c.author = {Author}")
-            ] IEnumerable<int> blogPostCount,
+                Id = "{Id}",
+                PartitionKey = "{Author}")] BlogPost bp,
         [CosmosDB("SwaBlog", "BlogContainer",
             Connection = "CosmosDbConnectionString")]out dynamic document,
         ILogger log)
     {
-        if (blogPostCount.First() == 0)
+        if (bp is null)
         {
             document = null;
             return new NotFoundResult();
