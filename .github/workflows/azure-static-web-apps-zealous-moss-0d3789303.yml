@@ -12,6 +12,9 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+  paths: 
+      - "EditDemo/**"
+      - ".github/workflows/azure-static-web-apps-zealous-moss-0d3789303.yml"
 
 jobs:
   build_and_deploy_job:
