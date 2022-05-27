@@ -6,9 +6,9 @@ namespace StaticWebAppAuthentication.Api;
 
 public static class StaticWebApiAppAuthorization
 {
-    public static ClientPrincipal ParseHttpHeaderForClientPrinciple(HttpRequest req)
+    public static ClientPrincipal ParseHttpHeaderForClientPrinciple(IHeaderDictionary headers)
     {
-        if (!req.Headers.TryGetValue("x-ms-client-principal", out var header))
+        if (!headers.TryGetValue("x-ms-client-principal", out var header))
         {
             return new ClientPrincipal();
         }

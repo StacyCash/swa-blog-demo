@@ -24,7 +24,7 @@ public class BlogPostSummaryService
         }
     }
 
-    public async void Add(BlogPost blogPost)
+    public void Add(BlogPost blogPost)
     {
         if (blogPost == null)
         {
@@ -60,6 +60,19 @@ public class BlogPostSummaryService
         {
             list[index] = blogPost;
         }
+        Summaries = list;
+    }
+
+    public void Remove(Guid id)
+    {
+        if (Summaries == null || !Summaries.Any(bp => bp.Id == id))
+        {
+            return;
+        }
+
+        var list = Summaries.ToList();
+        var summary = list.First(s => s.Id == id);
+        list.Remove(summary);
         Summaries = list;
     }
 }

@@ -12,6 +12,7 @@ else
 	<AuthorizeView Roles="admin">
         <Authorized>
             <a href="blogposts/@Id/edit">Edit</a>
+			<a @onclick="Delete">Delete</a>
         </Authorized>
     </AuthorizeView> 
 	<div>
@@ -19,31 +20,36 @@ else
 		<h2>@blogPost.Author</h2>
 		<div>@blogPost.PublishedDate</div>
 		<div>
-		@foreach(var tag in blogPost.Tags.CleanTags())
+		@foreach(var tag in blogPost.Tags!.CleanTags())
 		{
 		<em>@tag, </em>
 		}
 		</div>
 		<div>
-		@((MarkupString)Markdown.ToHtml(blogPost.BlogPostMarkdown))
+		@((MarkupString)Markdown.ToHtml(blogPost.BlogPostMarkdown!))
 		</div>
 	</div>
 }
 
 @code
 {
-	private BlogPost blogPost;
+    private BlogPost? blogPost;
 
-	[Parameter] 
-	public string Id { get; set; }
+    [Parameter]
+    public string? Id { get; set; }
 
-	protected override async Task OnParametersSetAsync()
-	{
-		if (!Guid.TryParse(Id, out Guid id))
-		{
-			throw new InvalidCastException();
-		}
+    protected override async Task OnParametersSetAsync()
+    {
+        if (!Guid.TryParse(Id, out Guid id))
+        {
+            throw new InvalidCastException();
+        }
 
-		blogPost = await service.GetBlogPost(id);
-	}
+        blogPost = await service.GetBlogPost(id);
+    }
+
+    private void Delete()
+    {
+        service.Delete(blogPost!.Id.Value, blogPost!.Author);
+    }
 }
