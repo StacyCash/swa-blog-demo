@@ -56,7 +56,11 @@ public class BlogPostSummaryService
         {
             summary.Title = blogPost.Title;
             summary.Tags = blogPost.Tags;
-            summary.Author = blogPost.BlogPostMarkdown![..500];
+            summary.BlogPostMarkdown = blogPost.BlogPostMarkdown!;
+            if (summary.BlogPostMarkdown.Length > 500)
+            {
+                summary.BlogPostMarkdown = summary.BlogPostMarkdown[..500];
+            }
         }
     }
 
