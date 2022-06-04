@@ -83,7 +83,7 @@ public class BlogPostService
             blogPosts[index] = savedBlogPost!;
         }
 
-        blogPostSummaryService.Replace(savedBlogPost!);
+        blogPostSummaryService.Update(savedBlogPost!);
     }
 
     public void Delete(Guid id, string author)

@@ -7,7 +7,7 @@ public class BlogPostSummaryService
 {
     private readonly HttpClient http;
 
-    public IEnumerable<BlogPost>? Summaries;
+    public List<BlogPost>? Summaries;
 
     public BlogPostSummaryService(HttpClient http)
     {
@@ -20,7 +20,7 @@ public class BlogPostSummaryService
         if (Summaries == null)
         {
             var result = await http.GetStringAsync("api/blogposts ");
-            Summaries = JsonConvert.DeserializeObject<BlogPost[]>(result);
+            Summaries = JsonConvert.DeserializeObject<List<BlogPost>>(result);
         }
     }
 
@@ -36,31 +36,28 @@ public class BlogPostSummaryService
             Summaries = new List<BlogPost>();
         }
 
-        if (blogPost.BlogPostMarkdown?.Length > 250)
+        if (blogPost.BlogPostMarkdown?.Length > 500)
         {
-            blogPost.BlogPostMarkdown = blogPost.BlogPostMarkdown.Substring(0, 250);
+            blogPost.BlogPostMarkdown = blogPost.BlogPostMarkdown.Substring(0, 500);
         }
 
-        var list = Summaries.ToList();
-        list.Add(blogPost);
-        Summaries = list;
+        Summaries.Add(blogPost);
     }
 
-    public void Replace(BlogPost blogPost)
+    public void Update(BlogPost blogPost)
     {
         if (Summaries == null || !Summaries.Any(bp => bp.Id == blogPost.Id))
         {
             return;
         }
 
-        var list = Summaries.ToList();
-
-        int index = list.FindIndex(item => item.Id == blogPost.Id);
-        if (index >= 0)
+        var summary = Summaries.Find(summary => summary.Id == blogPost.Id);
+        if (summary is not null)
         {
-            list[index] = blogPost;
+            summary.Title = blogPost.Title;
+            summary.Tags = blogPost.Tags;
+            summary.Author = blogPost.BlogPostMarkdown![..500];
         }
-        Summaries = list;
     }
 
     public void Remove(Guid id)
@@ -70,9 +67,7 @@ public class BlogPostSummaryService
             return;
         }
 
-        var list = Summaries.ToList();
-        var summary = list.First(s => s.Id == id);
-        list.Remove(summary);
-        Summaries = list;
+        var summary = Summaries.First(s => s.Id == id);
+        Summaries.Remove(summary);
     }
 }

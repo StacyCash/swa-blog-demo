@@ -3,7 +3,7 @@
 @using Models
 @attribute [Authorize(Roles = "admin")]
 @inject BlogPostService service
-@inject NavigationManager navigationManager;
+@inject NavigationManager navigationManager
 
 <AuthorizeView Roles="admin">
 	<Authorized>
@@ -20,16 +20,15 @@
 				<div><InputText @bind-Value=blogPost.Title /></div>
 			</div>
 			<div>
-				<div>Author</div>
-				<div><InputText @bind-Value=blogPost.Author /></div>
-			</div>
-			<div>
 				<div>Tags</div>
 				<div><InputText @bind-Value=tags /></div>
 			</div>
 			<div>
 				<div>Post</div>
-				<div><InputTextArea @bind-Value=blogPost.BlogPostMarkdown /></div>
+				<div>
+					<InputTextArea @bind-Value=blogPost.BlogPostMarkdown
+								   style=" width: 50%; height: 60vh; min-height: 100px;" />
+				</div>
 			</div>
 			<button type="submit">Save</button>
 

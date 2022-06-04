@@ -10,6 +10,8 @@ using Models;
 using System;
 using Microsoft.Azure.Cosmos;
 using System.Threading.Tasks;
+using StaticWebAppAuthentication.Api;
+using StaticWebAppAuthentication.Models;
 
 namespace CosmosDBTest;
 
@@ -75,10 +77,13 @@ public static class BlogPosts
         [HttpTrigger(AuthorizationLevel.Anonymous, "post",
             Route = "blogposts")]
             BlogPost blogPost,
+            HttpRequest request,
         [CosmosDB("SwaBlog", "BlogContainer",
             Connection = "CosmosDbConnectionString")]out dynamic document,
         ILogger log)
     {
+        ClientPrincipal cp = StaticWebApiAppAuthorization.ParseHttpHeaderForClientPrinciple(request.Headers);
+
         if (blogPost.Id != null)
         {
             document = null;
@@ -86,6 +91,7 @@ public static class BlogPosts
         }
 
         blogPost.Id = Guid.NewGuid();
+        blogPost.Author = cp.UserDetails;
 
         document = new
         {
@@ -145,8 +151,8 @@ public static class BlogPosts
     [CosmosDB("SwaBlog",
             "BlogContainer",
             Connection = "CosmosDbConnectionString",
-            Id = "{Id}",
-            PartitionKey = "{Author}")] BlogPost bp,
+            Id = "{id}",
+            PartitionKey = "{author}")] BlogPost bp,
     [CosmosDB(
             databaseName: "ToDoItems",
             containerName: "Items",
@@ -156,12 +162,12 @@ public static class BlogPosts
     {
         if (bp is null)
         {
-            return new OkResult();
+            return new NoContentResult();
         }
 
         Container container = client.GetDatabase("SwaBlog").GetContainer("BlogContainer");
         await container.DeleteItemAsync<BlogPost>(id, new PartitionKey(author));
 
-        return new OkResult();
+        return new NoContentResult();
     }
 }

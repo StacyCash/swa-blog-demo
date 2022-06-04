@@ -1,5 +1,6 @@
-﻿@page "/blogposts/{id}"
+﻿@page "/blogposts/{id:guid}"
 @inject BlogPostService service
+@inject NavigationManager navigationManager
 @using Markdig
 @using Models
 
@@ -9,26 +10,26 @@
 }
 else
 {
-	<AuthorizeView Roles="admin">
+    <AuthorizeView Roles="admin">
         <Authorized>
             <a href="blogposts/@Id/edit">Edit</a>
-			<a @onclick="Delete">Delete</a>
+            <a @onclick="Delete">Delete</a>
         </Authorized>
-    </AuthorizeView> 
-	<div>
-		<h1>@blogPost.Title</h1>
-		<h2>@blogPost.Author</h2>
-		<div>@blogPost.PublishedDate</div>
-		<div>
-		@foreach(var tag in blogPost.Tags!.CleanTags())
-		{
-		<em>@tag, </em>
-		}
-		</div>
-		<div>
-		@((MarkupString)Markdown.ToHtml(blogPost.BlogPostMarkdown!))
-		</div>
-	</div>
+    </AuthorizeView>
+    <div>
+        <h1>@blogPost.Title</h1>
+        <h2>@blogPost.Author</h2>
+        <div>@blogPost.PublishedDate</div>
+        <div>
+            @foreach (var tag in blogPost.Tags!.CleanTags())
+            {
+                <em>@tag, </em>
+            }
+        </div>
+        <div>
+            @((MarkupString)Markdown.ToHtml(blogPost.BlogPostMarkdown!))
+        </div>
+    </div>
 }
 
 @code
@@ -36,20 +37,16 @@ else
     private BlogPost? blogPost;
 
     [Parameter]
-    public string? Id { get; set; }
+    public Guid Id { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (!Guid.TryParse(Id, out Guid id))
-        {
-            throw new InvalidCastException();
-        }
-
-        blogPost = await service.GetBlogPost(id);
+        blogPost = await service.GetBlogPost(Id);
     }
 
     private void Delete()
     {
-        service.Delete(blogPost!.Id.Value, blogPost!.Author);
+        service.Delete(blogPost!.Id!.Value, blogPost!.Author!);
+        navigationManager.NavigateTo("blogposts");
     }
 }
