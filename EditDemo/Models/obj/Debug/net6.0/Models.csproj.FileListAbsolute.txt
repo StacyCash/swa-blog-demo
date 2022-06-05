@@ -10,3 +10,6 @@
 /Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Models/obj/Debug/net6.0/refint/Models.dll
 /Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Models/obj/Debug/net6.0/Models.pdb
 /Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Models/obj/Debug/net6.0/ref/Models.dll
+/Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Api/bin/output/Models.deps.json
+/Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Api/bin/output/Models.dll
+/Users/stacycashmore/code/github/swa-blog-demo/EditDemo/Api/bin/output/Models.pdb

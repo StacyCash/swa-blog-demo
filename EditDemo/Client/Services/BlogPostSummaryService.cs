@@ -36,12 +36,22 @@ public class BlogPostSummaryService
             Summaries = new List<BlogPost>();
         }
 
-        if (blogPost.BlogPostMarkdown?.Length > 500)
+        var summary = new BlogPost
         {
-            blogPost.BlogPostMarkdown = blogPost.BlogPostMarkdown.Substring(0, 500);
+            Id = blogPost.Id,
+            Author = blogPost.Author,
+            BlogPostMarkdown = blogPost.BlogPostMarkdown,
+            PublishedDate = blogPost.PublishedDate,
+            Tags = blogPost.Tags,
+            Title = blogPost.Title
+        };
+
+        if (summary.BlogPostMarkdown?.Length > 500)
+        {
+            summary.BlogPostMarkdown = summary.BlogPostMarkdown[..500];
         }
 
-        Summaries.Add(blogPost);
+        Summaries.Add(summary);
     }
 
     public void Update(BlogPost blogPost)

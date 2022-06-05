@@ -86,11 +86,14 @@ public class BlogPostService
         blogPostSummaryService.Update(savedBlogPost!);
     }
 
-    public void Delete(Guid id, string author)
+public void Delete(Guid id, string author)
+{
+    http.DeleteAsync($"/api/blogposts/{id}/{author}");
+    var blogPost = blogPosts.FirstOrDefault(bp => bp.Id == id);
+    if (blogPost is not null)
     {
-        http.DeleteAsync($"/api/blogposts/{id}/{author}");
-        blogPosts.Remove(blogPosts.FirstOrDefault(bp => bp.Id == id));
-        blogPostSummaryService.Remove(id);
+        blogPosts.Remove(blogPost);
     }
-
+    blogPostSummaryService.Remove(id);
+}
 }

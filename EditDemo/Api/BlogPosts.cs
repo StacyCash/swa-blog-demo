@@ -79,7 +79,8 @@ public static class BlogPosts
             BlogPost blogPost,
             HttpRequest request,
         [CosmosDB("SwaBlog", "BlogContainer",
-            Connection = "CosmosDbConnectionString")]out dynamic document,
+            Connection = "CosmosDbConnectionString")]
+            out dynamic document,
         ILogger log)
     {
         ClientPrincipal cp = StaticWebApiAppAuthorization.ParseHttpHeaderForClientPrinciple(request.Headers);
@@ -154,8 +155,8 @@ public static class BlogPosts
             Id = "{id}",
             PartitionKey = "{author}")] BlogPost bp,
     [CosmosDB(
-            databaseName: "ToDoItems",
-            containerName: "Items",
+            databaseName: "SwaBlog",
+            containerName: "BlogContainer",
             Connection = "CosmosDbConnectionString")] CosmosClient client,
 
     ILogger log)
