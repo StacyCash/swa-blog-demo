@@ -33,28 +33,36 @@ public class BlogPostSummaryService
 
         if (Summaries is null)
         {
-            Summaries = new List<BlogPost>();
+            return;
         }
 
-        var summary = new BlogPost
+        if (!Summaries.Any(summary =>
+            summary.Id == blogPost.Id && summary.Author == blogPost.Author))
         {
-            Id = blogPost.Id,
-            Author = blogPost.Author,
-            BlogPostMarkdown = blogPost.BlogPostMarkdown,
-            PublishedDate = blogPost.PublishedDate,
-            Tags = blogPost.Tags,
-            Title = blogPost.Title
-        };
+            var summary = new BlogPost
+            {
+                Id = blogPost.Id,
+                Author = blogPost.Author,
+                BlogPostMarkdown = blogPost.BlogPostMarkdown,
+                PublishedDate = blogPost.PublishedDate,
+                Tags = blogPost.Tags,
+                Title = blogPost.Title
+            };
 
-        if (summary.BlogPostMarkdown?.Length > 500)
-        {
-            summary.BlogPostMarkdown = summary.BlogPostMarkdown[..500];
+            if (summary.BlogPostMarkdown?.Length > 500)
+            {
+                summary.BlogPostMarkdown = summary.BlogPostMarkdown[..500];
+            }
+
+            Summaries.Add(summary);
         }
-
-        Summaries.Add(summary);
+        else
+        {
+            Replace(blogPost);
+        }
     }
 
-    public void Update(BlogPost blogPost)
+    public void Replace(BlogPost blogPost)
     {
         if (Summaries == null || !Summaries.Any(bp => bp.Id == blogPost.Id))
         {

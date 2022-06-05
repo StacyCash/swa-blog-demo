@@ -49,7 +49,7 @@ public class BlogPostService
         return blogPost;
     }
 
-    public async Task<Guid> CreateBlogPost(BlogPost blogPost)
+    public async Task<Guid> Create(BlogPost blogPost)
     {
         if (blogPost == null)
         {
@@ -68,32 +68,35 @@ public class BlogPostService
         return savedBlogPost!.Id!.Value;
     }
 
-    public async Task UpdateBlogPost(BlogPost blogPost)
+    public async Task Update(BlogPost blogPost)
     {
+        if (blogPost == null)
+        {
+            throw new ArgumentNullException(nameof(blogPost));
+        }
+
         var content = JsonConvert.SerializeObject(blogPost);
         var data = new StringContent(content, Encoding.UTF8, "application/json");
 
-        var result = await http.PutAsync("api/blogposts", data);
-        var json = await result.Content.ReadAsStringAsync();
-        BlogPost? savedBlogPost = JsonConvert.DeserializeObject<BlogPost>(json);
-
-        int index = blogPosts.FindIndex(item => item.Id == savedBlogPost!.Id);
+        await http.PutAsync("api/blogposts", data);
+        
+        int index = blogPosts.FindIndex(item => item.Id == blogPost.Id);
         if (index >= 0)
         {
-            blogPosts[index] = savedBlogPost!;
+            blogPosts[index] = blogPost;
         }
 
-        blogPostSummaryService.Update(savedBlogPost!);
+        blogPostSummaryService.Replace(blogPost);
     }
 
-public void Delete(Guid id, string author)
-{
-    http.DeleteAsync($"/api/blogposts/{id}/{author}");
-    var blogPost = blogPosts.FirstOrDefault(bp => bp.Id == id);
-    if (blogPost is not null)
+    public void Delete(Guid id, string author)
     {
-        blogPosts.Remove(blogPost);
+        http.DeleteAsync($"/api/blogposts/{id}/{author}");
+        var blogPost = blogPosts.FirstOrDefault(bp => bp.Id == id);
+        if (blogPost is not null)
+        {
+            blogPosts.Remove(blogPost);
+        }
+        blogPostSummaryService.Remove(id);
     }
-    blogPostSummaryService.Remove(id);
-}
 }

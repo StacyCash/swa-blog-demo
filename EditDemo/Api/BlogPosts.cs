@@ -139,7 +139,7 @@ public static class BlogPosts
                 Status = 2
             };
 
-        return new OkObjectResult(blogPost);
+        return new NoContentResult();
     }
 
     [FunctionName($"{nameof(BlogPosts)}_Delete")]

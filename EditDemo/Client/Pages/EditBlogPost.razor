@@ -39,44 +39,44 @@
 
 @code
 {
-	private BlogPost? blogPost;
-	private string mode = "edit";
-	private string tags = string.Empty;
+    private BlogPost? blogPost;
+    private string mode = "edit";
+    private string tags = string.Empty;
 
-	[Parameter] 
-	public string? Id { get; set; }
+    [Parameter]
+    public string? Id { get; set; }
 
-	protected override async Task OnParametersSetAsync()
-	{
-		if (Id == "new"){
-			mode = "create";
-			blogPost = new ();
-			return;
-		}
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id == "new"){
+            mode = "create";
+            blogPost = new ();
+            return;
+        }
 
-		if (!Guid.TryParse(Id, out Guid id))
-		{
-			throw new InvalidCastException();
-		}
+        if (!Guid.TryParse(Id, out Guid id))
+        {
+            throw new InvalidCastException();
+        }
 
-		blogPost = await service.GetBlogPost(id);
-		tags = String.Join(", ", blogPost!.Tags!.CleanTags());
-	}
+        blogPost = await service.GetBlogPost(id);
+        tags = String.Join(", ", blogPost!.Tags!.CleanTags());
+    }
 
-	private async void Save()
-	{
-		blogPost!.Tags = tags.Split(',').CleanTags();
+    private async void Save()
+    {
+        blogPost!.Tags = tags.Split(',').CleanTags();
 
-		if (mode == "create")
-		{
-			blogPost.PublishedDate = DateTime.Now;
-			blogPost.Id = await service.CreateBlogPost(blogPost);
-		}
-		else
-		{
-			await service.UpdateBlogPost(blogPost);
-		}
+        if (mode == "create")
+        {
+            blogPost.PublishedDate = DateTime.Now;
+            blogPost.Id = await service.Create(blogPost);
+        }
+        else
+        {
+            await service.Update(blogPost);
+        }
 
-		navigationManager.NavigateTo($"blogposts/{blogPost.Id}");
-	}
+        navigationManager.NavigateTo($"blogposts/{blogPost.Id}");
+    }
 }
