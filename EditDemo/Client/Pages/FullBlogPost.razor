@@ -13,7 +13,7 @@ else
     <AuthorizeView Roles="admin">
         <Authorized>
             <a href="blogposts/@Id/edit">Edit</a>
-            <a @onclick="Delete">Delete</a>
+            <a href="javascript:;" @onclick="Delete">Delete</a>
         </Authorized>
     </AuthorizeView>
     <div>
