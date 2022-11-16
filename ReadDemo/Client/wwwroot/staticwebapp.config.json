@@ -1,6 +1,6 @@
 {
   "platform": {
-    "apiRuntime": "dotnet:7.0"
+    "apiRuntime": "dotnet-isolated:7.0"
   },
   "routes": [
     {
